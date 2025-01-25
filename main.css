@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    cursor: none; /* 隐藏默认鼠标指针 */
+    transition: opacity 0.5s ease; /* 页面淡出效果 */
+}
+
+body.hidden {
+    opacity: 0;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 32px; /* 根据鼠标图片大小调整 */
+    height: 32px;
+    pointer-events: none; /* 避免阻挡鼠标事件 */
+    transform: translate(-50%, -50%); /* 居中光标图片 */
+    z-index: 1000;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    background-color: #464646;
+    position: relative;
+}
+
+/* 引入字体文件 */
+@font-face {
+    font-family: 'ShanghaiFace'; /* 自定义字体名称 */
+    src: url('./font/ShanghaiFace.ttf') format('truetype');
+    font-weight: normal; /* 字体粗细 */
+    font-style: normal; /* 字体样式 */
+    font-size: 20px;
+    line-height: 20px;
+}
