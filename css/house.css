@@ -1,0 +1,238 @@
+.house_background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 0;
+}
+
+/* 柜子 */
+.cabinet {
+    width: 35%;
+    position: absolute;
+    z-index: 1;
+    height: 92%;
+}
+
+/* 大小蜘蛛 */
+.big_spider {
+    width: 2.5%;
+    position: absolute;
+    z-index: 2;
+    left: 20.5%;
+    top: 18.5%;
+}
+
+.small_spider {
+    width: 2%;
+    position: absolute;
+    z-index: 2;
+    left: 16%;
+    top: 18%;
+}
+
+/* 窗户容器 */
+.window-container {
+    position: absolute;
+    width: 27%;
+    left: 69%;
+    top: 0;
+    z-index: 2;
+}
+
+/* 窗户 */
+.thewindow {
+    width: 100%; /* 让窗户占满容器 */
+}
+
+/* 触手（相对窗户定位） */
+.hand {
+    position: absolute;
+    width: 67%;
+    left: 23%;
+    top: 48%;
+    z-index: 3;
+}
+
+/* 桌子 */
+.thetable {
+    width: 100%;
+    position: absolute;
+    z-index: 4;
+    left: 0%;
+    bottom: 0%;
+    height: 52.3%;
+}
+
+/* 骷髅 */
+.hedgehog {
+    width: 8%;
+    position: absolute;
+    z-index: 4;
+    left: 0%;
+    bottom: 10%;
+}
+
+/* 猫和书 */
+.cat-book {
+    width: 12%;
+    position: absolute;
+    z-index: 4;
+    left: 60%;
+    bottom: 48%;
+}
+
+.cat {
+    width: 10%;
+    bottom: 42%;
+    position: fixed;
+    left: 61.5%;
+}
+
+.book {
+    width: 10%;
+    z-index: 4;
+    bottom: 35%;
+    position: fixed;
+    left: 61%;
+}
+
+/* 花盆 */
+.flowerpot {
+    width: 22%;
+    position: absolute;
+    z-index: 4;
+    left: 71.5%;
+    bottom: 35%;
+}
+
+/* 窗帘 */
+.window_curtain {
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    top: 0;
+}
+
+/* 小绿灯 */
+.light_container {
+    width: 100%;
+    position: absolute;
+    z-index: 6;
+    top: 0;
+    left: 0;
+}
+
+/* 小绿灯 */
+.light_8 {
+    position: absolute;
+    left: 87%;
+    width: 3.2%;
+}
+
+.light_7 {
+    position: absolute;
+    left: 76%;
+    width: 2.6%;   
+}
+
+.light_6 {
+    position: absolute;
+    left: 69%;
+    width: 2.35%;
+}
+
+.light_5 {
+    position: absolute;
+    left: 57.9%;
+    width: 2.5%;
+}
+
+.light_4 {
+    position: absolute;
+    left: 32%;
+    width: 2.3%;
+}
+
+.light_3 {
+    position: absolute;
+    left: 20%;
+    width: 2.2%;
+}
+
+.light_2 {
+    position: absolute;
+    left: 13%;
+    width: 3.3%;
+}
+
+.light_1 {
+    position: absolute;
+    left: 5%;
+    width: 3%;
+}
+
+/* 链子 */
+.chain {
+    width: 100%;
+    left: 0;
+    position: absolute;
+    z-index: 7;
+    top: 0;
+}
+
+/* 灯光 */
+.light {
+    width: 96%;
+    left: 0;
+    position: absolute;
+    z-index: 7;
+    top: 0;
+}
+
+/* 黑色前景 */
+.foreground {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    /* 鼠标点击不遮挡 */
+    pointer-events: none;
+}
+
+/* 技能卡片 */
+.skill_container {
+    width: 100%;
+    left: 12%;
+    position: absolute;
+    z-index: 8;
+    bottom: 9%;
+}
+
+.card {
+    width: 9%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out, box-shadow 0.4s ease-out;
+    cursor: pointer;
+    will-change: transform, opacity, box-shadow;
+}
+
+.card:hover {
+    transform: scale(1.2);
+    opacity: 0.95;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 额外的平滑过渡 */
+@keyframes gentleScale {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}

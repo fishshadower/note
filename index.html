@@ -23,6 +23,23 @@
             top: 0;
             left: 0;
             z-index: 1;
+
+            /* 初始状态 */
+            opacity: 0.2; /* 默认亮度 */
+            animation: breathing 3s ease-in-out infinite; /* 呼吸灯效果动画，时长为 2s，舒缓过渡 */
+        }
+
+        /* 定义呼吸灯动画 */
+        @keyframes breathing {
+            0% {
+                opacity: 0.2; /* 初始亮度 */
+            }
+            50% {
+                opacity: 1; /* 最亮 */
+            }
+            100% {
+                opacity: 0.2; /* 回到初始亮度 */
+            }
         }
 
         .title {
@@ -92,8 +109,8 @@
         }
         .start_chat_div {
             position: absolute;
-            bottom: 19%;
-            right: 79%;
+            bottom: 19.5%;
+            right: 79.5%;
             z-index: 7;
         }
 
@@ -104,7 +121,7 @@
 
         .start_chat_text {
             font-family: 'ShanghaiFace', sans-serif;
-            font-size: 28px;
+            font-size: clamp(20px, 1.8vw, 60px); /* 字体大小动态适应 */
             color: #FFFFFF;
             transition: color 0.3s ease; /* 平滑过渡 */
         }
@@ -130,11 +147,23 @@
 
         .old_movie {
             width: 100%;
-            position: absolute;
+            position: fixed;  /* 改为 fixed，这样不会影响页面内容的布局 */
             top: 0;
             left: 0;
             z-index: 10;
+            max-height: 100vh; /* 限制图片最大高度为视口高度 */
+            object-fit: cover; /* 确保图片保持比例填充 */
+            pointer-events: none; /* 禁止接收鼠标事件 */
         }
+
+        #old_movie_1, #old_movie_2 {
+            display: none; /* 初始都不显示 */
+        }
+
+        #old_movie_1 {
+            display: block;
+        }
+
 
     </style>
 </head>
@@ -185,6 +214,12 @@
 
         <!-- 老电影效果 -->
         <!-- <img src="./image/old_movie.gif" alt="" class="old_movie"> -->
+
+        <img src="./image/old_movie_1.png" alt="" class="old_movie" id="old_movie_1">
+        <img src="./image/old_movie_2.png" alt="" class="old_movie" id="old_movie_2">
+
+
+
     </div>
 
     <!-- 动画 -->
@@ -220,12 +255,30 @@
 			const big_title = document.getElementById('big_title');
 			anime({
                 targets: big_title,
-                translateX: deltaX / 3, 
+                translateX: deltaX / 20, 
                 translateY: deltaY / 30,
                 duration: 500,
                 easing: 'easeOutQuad'
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const movie1 = document.getElementById('old_movie_1');
+            const movie2 = document.getElementById('old_movie_2');
+            let isMovie1Visible = true;
+
+            setInterval(() => {
+                if (isMovie1Visible) {
+                    movie1.style.display = 'none';
+                    movie2.style.display = 'block';
+                } else {
+                    movie1.style.display = 'block';
+                    movie2.style.display = 'none';
+                }
+                isMovie1Visible = !isMovie1Visible;
+            }, 200); // 每 200ms 切换一次
+        });
+
     </script>
 
     <!-- 自定义鼠标指针  -->
