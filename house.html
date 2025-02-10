@@ -1,12 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>希曦的小屋</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/house.css">
 </head>
+
 <body>
-    <h1>房子里</h1>
+    <!-- 自定义鼠标指针 -->
+    <img src="./image/cursor.png" alt="Custom Cursor" class="custom-cursor" id="customCursor">
+
+    <div class="main">
+        <img src="./image/house/咒语背景墙@2x.png" alt="" class="house_background" id="house_background">
+        
+        <img src="./image/house/柜子@2x.png" alt="" class="cabinet" id="cabinet">
+
+        <img src="./image/house/大蜘蛛@2x.png" alt="" class="big_spider" id="big_spider">
+        <img src="./image/house/小蜘蛛@2x.png" alt="" class="small_spider" id="small_spider">
+
+        <!-- 让触手作为窗户的子元素 -->
+        <div class="window-container">
+            <img src="./image/house/窗户@2x.png" alt="窗户" class="thewindow" id="thewindow">
+            <img src="./image/house/触手@2x.png" alt="触手" class="hand" id="hand">
+        </div>
+
+
+        <img src="./image/house/桌子@2x.png" alt="" class="thetable" id="thetable">
+
+        <img src="./image/house/桌子上左侧的骷髅@2x.png" alt="" class="hedgehog" id="hedgehog">
+
+        <!-- 猫和书 -->
+        <div class="cat-book">
+            <img src="./image/house/猫@2x.png" alt="" class="cat" id="cat">
+            <img src="./image/house/书@2x.png" alt="" class="book" id="book">
+        </div>
+
+        <img src="./image/house/花盆@2x.png" alt="" class="flowerpot" id="flowerpot">
+
+        <img src="./image/house/窗帘@2x.png" alt="" class="window_curtain" id="window_curtain">
+
+        <div class="light_container">
+            <img src="./image/house/灯1@2x.png" alt="" class="light_1" id="light_1">
+            <img src="./image/house/灯2@2x.png" alt="" class="light_2" id="light_2">
+            <img src="./image/house/灯3@2x.png" alt="" class="light_3" id="light_3">
+            <img src="./image/house/灯4@2x.png" alt="" class="light_4" id="light_4">
+            <img src="./image/house/灯5@2x.png" alt="" class="light_5" id="light_5">
+            <img src="./image/house/灯6@2x.png" alt="" class="light_6" id="light_6">
+            <img src="./image/house/灯7@2x.png" alt="" class="light_7" id="light_7">
+            <img src="./image/house/灯8@2x.png" alt="" class="light_8" id="light_8">
+        </div>
+        
+
+        <img src="./image/house/链子和小灯珠@2x.png" alt="" class="chain" id="chain">
+
+        <img src="./image/house/灯光@2x.png" alt="" class="light" id="light">
+
+
+        <img src="./image/house/黑色前景@2x.png" alt="" class="foreground" id="foreground">
+
+        <div class="skill_container">
+            <img src="./image/house/pc.png" alt="PC" class="card" data-active="./image/house/pc_active.png">
+            <img src="./image/house/移动端.png" alt="Phone" class="card" data-active="./image/house/移动端_active.png">
+            <img src="./image/house/游戏.png" alt="Game" class="card" data-active="./image/house/游戏_active.png">
+            <img src="./image/house/像素.png" alt="Pixel" class="card" data-active="./image/house/像素_active.png">
+            <img src="./image/house/平面.png" alt="Plane" class="card" data-active="./image/house/平面_active.png">
+            <img src="./image/house/插画.png" alt="Art" class="card" data-active="./image/house/插画_active.png">
+            <img src="./image/house/剧本杀.png" alt="Script" class="card" data-active="./image/house/剧本杀_active.png">
+            <img src="./image/house/3d.png" alt="3D" class="card" data-active="./image/house/3d_active.png">
+        </div>
+        
+        
+    </div>
+
+    <!-- 交互 -->
+    <script>
+        // 鼠标移入技能卡片，图片变为active的图片
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const originalSrc = card.src; // 记录原始图片
+                const activeSrc = card.dataset.active; // 读取 `data-active` 存储的激活图片
+
+                card.addEventListener('mouseenter', () => {
+                    card.src = activeSrc;
+                    card.style.transform = 'scale(1.2)'; // 鼠标移入时放大
+                    card.style.opacity = '0.95';
+                    card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.src = originalSrc;
+                    card.style.transform = 'scale(1)'; // 鼠标移出恢复原始大小
+                    card.style.opacity = '1';
+                    card.style.boxShadow = 'none';
+                });
+            });
+        });
+
+
+
+    </script>
+
+    <!-- 自定义鼠标指针  -->
+    <script>
+        // 获取自定义鼠标指针的 DOM 元素
+        const customCursor = document.getElementById('customCursor');
+
+        // 监听鼠标移动事件，实时更新光标位置
+        document.addEventListener('mousemove', (event) => {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // 更新光标的位置
+            customCursor.style.left = `${mouseX}px`;
+            customCursor.style.top = `${mouseY}px`;
+        });
+
+        // 监听鼠标点击事件，改变鼠标样式或触发动画
+        document.addEventListener('mousedown', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(1.2)'; // 点击时放大
+        });
+
+        document.addEventListener('mouseup', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(1)'; // 恢复默认大小
+        });
+    </script>
 </body>
+
 </html>
