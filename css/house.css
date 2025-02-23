@@ -49,9 +49,9 @@
 /* 触手（相对窗户定位） */
 .hand {
     position: absolute;
-    width: 67%;
-    left: 23%;
-    top: 48%;
+    width: 79%;
+    left: 21%;
+    top: 42%;
     z-index: 3;
 }
 
@@ -67,10 +67,28 @@
 
 /* 骷髅 */
 .hedgehog {
-    width: 8%;
+    width: 10%;
     position: absolute;
     z-index: 4;
     left: 0%;
+    bottom: 10%;
+}
+
+/* 左边咖啡 */
+.hedgehog_left {
+    width: 7%;
+    position: absolute;
+    z-index: 4;
+    left: 34%;
+    bottom: 34%;
+}
+
+/* 右边咖啡 */
+.hedgehog_right {
+    width: 8%;
+    position: absolute;
+    z-index: 4;
+    left: 90%;
     bottom: 10%;
 }
 
@@ -78,9 +96,10 @@
 .cat-book {
     width: 12%;
     position: absolute;
-    z-index: 4;
+    z-index: 40;
     left: 60%;
     bottom: 48%;
+    cursor: pointer;
 }
 
 .cat {
@@ -88,6 +107,23 @@
     bottom: 42%;
     position: fixed;
     left: 61.5%;
+    z-index: 40;
+    /* pointer-events: auto; */
+    transition: opacity 0.3s ease-in-out; /* 让切换更加平滑 */
+    opacity: 1;
+    visibility: visible;
+}
+
+.dog {
+    width: 10%;
+    bottom: 42%;
+    position: fixed;
+    left: 61.5%;
+    z-index: 40;
+    /* pointer-events: auto; */
+    transition: opacity 0.3s ease-in-out; /* 让切换更加平滑 */
+    opacity: 0;
+    visibility: hidden;
 }
 
 .book {
@@ -112,6 +148,14 @@
     width: 100%;
     position: absolute;
     z-index: 5;
+    top: 0;
+}
+
+/* 小灯光 */
+.light_all {
+    width: 100%;
+    position: absolute;
+    z-index: 6;
     top: 0;
 }
 
@@ -206,33 +250,26 @@
 /* 技能卡片 */
 .skill_container {
     width: 100%;
-    left: 12%;
+    left: 14%;
     position: absolute;
     z-index: 8;
     bottom: 9%;
 }
 
 .card {
-    width: 9%;
+    width: 8.5%;
     height: auto;
     object-fit: contain;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out, box-shadow 0.4s ease-out;
+    transition: all 0.4s ease-out !important;
     cursor: pointer;
-    will-change: transform, opacity, box-shadow;
+    will-change: transform, opacity;
 }
 
-.card:hover {
-    transform: scale(1.2);
-    opacity: 0.95;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* 额外的平滑过渡 */
-@keyframes gentleScale {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.2);
-    }
+.mask {
+    width: 17%;
+    left: 41%;
+    position: absolute;
+    z-index: 9;
+    top: 9%;
+    pointer-events: none;
 }

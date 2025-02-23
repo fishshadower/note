@@ -15,7 +15,7 @@
 
     <div class="main">
         <img src="./image/house/咒语背景墙@2x.png" alt="" class="house_background" id="house_background">
-        
+
         <img src="./image/house/柜子@2x.png" alt="" class="cabinet" id="cabinet">
 
         <img src="./image/house/大蜘蛛@2x.png" alt="" class="big_spider" id="big_spider">
@@ -24,25 +24,25 @@
         <!-- 让触手作为窗户的子元素 -->
         <div class="window-container">
             <img src="./image/house/窗户@2x.png" alt="窗户" class="thewindow" id="thewindow">
-            <img src="./image/house/触手@2x.png" alt="触手" class="hand" id="hand">
+            <!-- <img src="./image/house/触手@2x.png" alt="触手" class="hand" id="hand"> -->
+            <img src="./image/house/触手.gif" alt="触手" class="hand" id="hand">
         </div>
 
+        <img src="./image/house/面具眨眼.gif" alt="" class="mask" id="mask">
 
         <img src="./image/house/桌子@2x.png" alt="" class="thetable" id="thetable">
+        <img src="./image/house/骷髅.gif" alt="" class="hedgehog" id="hedgehog">
 
-        <img src="./image/house/桌子上左侧的骷髅@2x.png" alt="" class="hedgehog" id="hedgehog">
-
-        <!-- 猫和书 -->
-        <div class="cat-book">
-            <img src="./image/house/猫@2x.png" alt="" class="cat" id="cat">
-            <img src="./image/house/书@2x.png" alt="" class="book" id="book">
-        </div>
+        <img src="./image/house/左-杯子.gif" alt="" class="hedgehog_left" id="hedgehog_left">
+        <img src="./image/house/右-杯子.gif" alt="" class="hedgehog_right" id="hedgehog_right">
 
         <img src="./image/house/花盆@2x.png" alt="" class="flowerpot" id="flowerpot">
 
         <img src="./image/house/窗帘@2x.png" alt="" class="window_curtain" id="window_curtain">
 
-        <div class="light_container">
+        <img src="./image/house/小灯.gif" alt="" class="light_all" id="light_all">
+
+        <!-- <div class="light_container">
             <img src="./image/house/灯1@2x.png" alt="" class="light_1" id="light_1">
             <img src="./image/house/灯2@2x.png" alt="" class="light_2" id="light_2">
             <img src="./image/house/灯3@2x.png" alt="" class="light_3" id="light_3">
@@ -51,12 +51,19 @@
             <img src="./image/house/灯6@2x.png" alt="" class="light_6" id="light_6">
             <img src="./image/house/灯7@2x.png" alt="" class="light_7" id="light_7">
             <img src="./image/house/灯8@2x.png" alt="" class="light_8" id="light_8">
-        </div>
-        
+        </div> -->
+
 
         <img src="./image/house/链子和小灯珠@2x.png" alt="" class="chain" id="chain">
 
         <img src="./image/house/灯光@2x.png" alt="" class="light" id="light">
+
+        <!-- 猫和书 -->
+        <div class="cat-book">
+            <img src="./image/house/猫.png" alt="" class="cat" id="cat">
+            <img src="./image/house/汪.png" alt="" class="dog" id="dog">
+            <img src="./image/house/书@2x.png" alt="" class="book" id="book">
+        </div>
 
 
         <img src="./image/house/黑色前景@2x.png" alt="" class="foreground" id="foreground">
@@ -71,35 +78,117 @@
             <img src="./image/house/剧本杀.png" alt="Script" class="card" data-active="./image/house/剧本杀_active.png">
             <img src="./image/house/3d.png" alt="3D" class="card" data-active="./image/house/3d_active.png">
         </div>
-        
-        
+
+
     </div>
 
     <!-- 交互 -->
-    <script>
-        // 鼠标移入技能卡片，图片变为active的图片
+    <script>        
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const cards = document.querySelectorAll('.card');
+
+        //     // 预加载所有激活图片
+        //     cards.forEach(card => {
+        //         new Image().src = card.dataset.active;
+        //     });
+
+        //     cards.forEach(card => {
+        //         const originalSrc = card.src;
+        //         const activeSrc = card.dataset.active;
+
+        //         card.addEventListener('mouseenter', () => {
+        //             card.src = activeSrc;
+        //             card.style.transform = 'scale(1.4)';
+        //             card.style.zIndex = 10;
+
+        //         });
+
+        //         card.addEventListener('mouseleave', () => {
+                    
+        //             card.src = originalSrc;
+        //             card.style.zIndex = 8;
+        //             card.style.transform = 'scale(1)';
+                    
+        //         });
+        //     });
+        // });
+
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
 
+            // 预加载所有激活图片
             cards.forEach(card => {
-                const originalSrc = card.src; // 记录原始图片
-                const activeSrc = card.dataset.active; // 读取 `data-active` 存储的激活图片
+                new Image().src = card.dataset.active;
+            });
+
+            cards.forEach(card => {
+                const originalSrc = card.src;
+                const activeSrc = card.dataset.active;
+
+                let isHovered = false; // 标记当前是否处于 hover 状态
+                let isImageLoaded = false; // 标记激活图片是否已加载完成
 
                 card.addEventListener('mouseenter', () => {
-                    card.src = activeSrc;
-                    card.style.transform = 'scale(1.2)'; // 鼠标移入时放大
-                    card.style.opacity = '0.95';
-                    card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+                    isHovered = true; // 标记 hover 状态
+                    card.src = activeSrc; // 切换图片
+
+                    // 如果图片已经加载完成，直接应用放大效果
+                    if (card.complete) {
+                        isImageLoaded = true;
+                        card.style.transform = 'scale(1.8)';
+                        card.style.zIndex = 10;
+                    } else {
+                        // 监听图片加载完成事件
+                        card.addEventListener('load', () => {
+                            isImageLoaded = true;
+                            if (isHovered) { // 确保 hover 状态仍然有效
+                                card.style.transform = 'scale(1.8)';
+                                card.style.zIndex = 10;
+                            }
+                        }, { once: true });
+                    }
                 });
 
                 card.addEventListener('mouseleave', () => {
+                    isHovered = false; // 取消 hover 状态
+                    isImageLoaded = false; // 重置图片加载状态
+
+                    // 先切换回原始图片
                     card.src = originalSrc;
-                    card.style.transform = 'scale(1)'; // 鼠标移出恢复原始大小
-                    card.style.opacity = '1';
-                    card.style.boxShadow = 'none';
+
+                    // 强制浏览器重绘，避免闪烁
+                    void card.offsetWidth;
+
+                    // 缩小图片
+                    card.style.transform = 'scale(1)';
+
+                    // 恢复层级
+                    card.style.zIndex = 8;
                 });
             });
         });
+
+
+        window.onload = function() {
+            const cat = document.getElementById('cat');
+            const dog = document.getElementById('dog');
+            const catbook = document.getElementById('cat-book');
+
+            // 监听鼠标移入 "animal-container"
+            catbook.addEventListener('mouseenter', function () {
+                cat.style.opacity = '0';
+                cat.style.visibility = 'hidden';
+                dog.style.opacity = '1';
+                dog.style.visibility = 'visible';
+            });
+
+            catbook.addEventListener('mouseleave', function () {
+                cat.style.opacity = '1';
+                cat.style.visibility = 'visible';
+                dog.style.opacity = '0';
+                dog.style.visibility = 'hidden';
+            });
+        }
 
 
 
