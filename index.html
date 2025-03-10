@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>希曦的小屋</title>
 	<link rel="stylesheet" href="main.css">
-	<script src="./main.js"></script>
     <script src="./js/anime.min.js"></script>
     <style>
         .moon {
@@ -199,7 +198,7 @@
         <img src="./image/person_begin.png" alt="Person" class="person">
         <img src="./image/hi.png" alt="Hi" class="hi">
 
-        <div class="start_chat_container">
+        <div class="start_chat_container clickable">
             <img src="./image/start_chat.png" alt="Chat" class="start_chat" id="start_chat">
             <div class="start_chat_div" id="start_chat_div">
                 <span class="start_chat_text">点我，开始对话</span>
@@ -210,17 +209,16 @@
 
         
         <!-- 简历下载 -->
-         <img src="./image/download.png" alt="Download" class="download" id="download">
+        <img src="./image/download.png" alt="Download" class="download clickable" id="download">
 
         <!-- 老电影效果 -->
-        <!-- <img src="./image/old_movie.gif" alt="" class="old_movie"> -->
-
         <img src="./image/old_movie_1.png" alt="" class="old_movie" id="old_movie_1">
         <img src="./image/old_movie_2.png" alt="" class="old_movie" id="old_movie_2">
 
 
-
     </div>
+
+    <script src="./main.js"></script>
 
     <!-- 动画 -->
     <script>
@@ -280,31 +278,7 @@
         });
 
     </script>
-
-    <!-- 自定义鼠标指针  -->
-    <script>
-        // 获取自定义鼠标指针的 DOM 元素
-        const customCursor = document.getElementById('customCursor');
-
-        // 监听鼠标移动事件，实时更新光标位置
-        document.addEventListener('mousemove', (event) => {
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-
-            // 更新光标的位置
-            customCursor.style.left = `${mouseX}px`;
-            customCursor.style.top = `${mouseY}px`;
-        });
-
-        // 监听鼠标点击事件，改变鼠标样式或触发动画
-        document.addEventListener('mousedown', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1.2)'; // 点击时放大
-        });
-
-        document.addEventListener('mouseup', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1)'; // 恢复默认大小
-        });
-    </script>
+    
 
     <!-- 交互处理 -->
     <script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>希曦的小屋 - 作品展示</title>
+    <script src="./js/anime.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/works.css">
+</head>
+
+<body>
+    <!-- 自定义鼠标指针 -->
+    <img src="./image/cursor.png" alt="Custom Cursor" class="custom-cursor" id="customCursor">
+
+    <!-- 返回 -->
+    <img src="./image/back.png" alt="Back" class="back clickable" id="back">
+
+    <div class="main">
+        <!-- 底图 -->
+        <img src="./image/works/底.png" alt="" class="works_background">
+
+        <!-- 边框 -->
+        <img src="./image/works/border.png" alt="" class="border">
+
+        <div class="works_container">
+
+            <div class="skill_menu" id="skill_menu">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+            </div>
+
+            <img src="./image/works/left_chunk.png" class="left_chunk">
+
+            <div class="companies" id="companies">
+                <!-- JS动态展示公司 -->
+            </div>
+
+            <img src="./image/works/right_chunk.png" class="right_chunk">
+            
+            
+        </div>
+            
+        </div>
+
+        
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+        // 读取 JSON 文件
+        let mainData;
+        fetch('https://fishshadower.github.io/file_hub/mainData.json')
+            .then(response => response.json())
+            .then(data => {
+                mainData = data;
+                initializeSkills(data.skills);
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+
+        // 展示公司
+        function initializeSkills(skills) {
+
+            
+        }
+
+        // 返回按钮
+        document.getElementById('back').addEventListener('click', () => {
+            window.location.href = './house.html';
+        });
+
+    </script>
+</body>
+
+</html>

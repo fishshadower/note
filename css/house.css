@@ -19,7 +19,7 @@
 .big_spider {
     width: 2.5%;
     position: absolute;
-    z-index: 2;
+    z-index: 999;
     left: 20.5%;
     top: 18.5%;
 }
@@ -27,10 +27,17 @@
 .small_spider {
     width: 2%;
     position: absolute;
-    z-index: 2;
+    z-index: 999;
     left: 16%;
     top: 18%;
 }
+
+.big_spider, .small_spider {
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 
 /* 窗户容器 */
 .window-container {
@@ -96,10 +103,11 @@
 .cat-book {
     width: 12%;
     position: absolute;
-    z-index: 40;
+    z-index: 999;
     left: 60%;
     bottom: 48%;
     cursor: pointer;
+    pointer-events: auto;
 }
 
 .cat {
@@ -107,21 +115,19 @@
     bottom: 42%;
     position: fixed;
     left: 61.5%;
-    z-index: 40;
-    /* pointer-events: auto; */
-    transition: opacity 0.3s ease-in-out; /* 让切换更加平滑 */
+    z-index: 999;
+    pointer-events: auto;
     opacity: 1;
     visibility: visible;
 }
 
 .dog {
-    width: 10%;
+    width: 10.3%;
     bottom: 42%;
     position: fixed;
-    left: 61.5%;
-    z-index: 40;
-    /* pointer-events: auto; */
-    transition: opacity 0.3s ease-in-out; /* 让切换更加平滑 */
+    left: 59.8%;
+    z-index: 999;
+    pointer-events: auto;
     opacity: 0;
     visibility: hidden;
 }
@@ -256,6 +262,7 @@
     bottom: 9%;
 }
 
+/* 技能卡片 */
 .card {
     width: 8.5%;
     height: auto;
@@ -265,11 +272,67 @@
     will-change: transform, opacity;
 }
 
+/* 面具 */
 .mask {
     width: 17%;
     left: 41%;
     position: absolute;
-    z-index: 9;
-    top: 9%;
+    z-index: 4;
+    top: 10%;
     pointer-events: none;
+}
+
+/* 思考 */
+.think_more {
+    width: 7%;
+    left: 37%;
+    position: absolute;
+    z-index: 4;
+    top: 21%;
+    pointer-events: none;
+    transform: rotate(180deg);
+}
+
+/* 返回 */
+.back {
+    width: 3%;
+    left: 1%;
+    position: absolute;
+    z-index: 10;
+    top: 1%;
+}
+
+/* 老电影 */
+.old_movie {
+    width: 100%;
+    position: fixed;  /* 改为 fixed，这样不会影响页面内容的布局 */
+    top: 0;
+    left: 0;
+    z-index: 999;
+    max-height: 100vh; /* 限制图片最大高度为视口高度 */
+    object-fit: cover; /* 确保图片保持比例填充 */
+    pointer-events: none; /* 禁止接收鼠标事件 */
+}
+
+#old_movie_1, #old_movie_2 {
+    z-index: 999; 
+    display: none; /* 初始都不显示 */
+}
+
+#old_movie_1 {
+    z-index: 999; 
+    display: block;
+}
+
+/* 透明卡片，人物脸部触发 */
+.face_card {
+    position: absolute;
+    top: 33%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    width: 178px;
+    height: 205px;
+    background-color: rgba(255, 255, 255, 0);  /* 透明背景 */
+    z-index: 999;
+    cursor: pointer;
 }

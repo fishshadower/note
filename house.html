@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>希曦的小屋</title>
+    <script src="./js/anime.min.js"></script>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="./css/house.css">
 </head>
@@ -12,6 +13,9 @@
 <body>
     <!-- 自定义鼠标指针 -->
     <img src="./image/cursor.png" alt="Custom Cursor" class="custom-cursor" id="customCursor">
+
+    <!-- 透明卡片，人物脸部触发 -->
+    <div class="face_card" id="face_card"></div>
 
     <div class="main">
         <img src="./image/house/咒语背景墙@2x.png" alt="" class="house_background" id="house_background">
@@ -29,6 +33,7 @@
         </div>
 
         <img src="./image/house/面具眨眼.gif" alt="" class="mask" id="mask">
+        <img src="./image/think_more.gif" alt="" class="think_more" id="think_more">
 
         <img src="./image/house/桌子@2x.png" alt="" class="thetable" id="thetable">
         <img src="./image/house/骷髅.gif" alt="" class="hedgehog" id="hedgehog">
@@ -69,50 +74,37 @@
         <img src="./image/house/黑色前景@2x.png" alt="" class="foreground" id="foreground">
 
         <div class="skill_container">
-            <img src="./image/house/pc.png" alt="PC" class="card" data-active="./image/house/pc_active.png">
-            <img src="./image/house/移动端.png" alt="Phone" class="card" data-active="./image/house/移动端_active.png">
-            <img src="./image/house/游戏.png" alt="Game" class="card" data-active="./image/house/游戏_active.png">
-            <img src="./image/house/像素.png" alt="Pixel" class="card" data-active="./image/house/像素_active.png">
-            <img src="./image/house/平面.png" alt="Plane" class="card" data-active="./image/house/平面_active.png">
-            <img src="./image/house/插画.png" alt="Art" class="card" data-active="./image/house/插画_active.png">
-            <img src="./image/house/剧本杀.png" alt="Script" class="card" data-active="./image/house/剧本杀_active.png">
-            <img src="./image/house/3d.png" alt="3D" class="card" data-active="./image/house/3d_active.png">
+            <img src="./image/house/pc.png" alt="PC" class="card clickable" data-active="./image/house/pc_active.png">
+            <img src="./image/house/移动端.png" alt="Phone" class="card clickable" data-active="./image/house/移动端_active.png">
+            <img src="./image/house/游戏.png" alt="Game" class="card clickable" data-active="./image/house/游戏_active.png">
+            <img src="./image/house/像素.png" alt="Pixel" class="card clickable" data-active="./image/house/像素_active.png">
+            <img src="./image/house/平面.png" alt="Plane" class="card clickable" data-active="./image/house/平面_active.png">
+            <img src="./image/house/插画.png" alt="Art" class="card clickable" data-active="./image/house/插画_active.png">
+            <img src="./image/house/剧本杀.png" alt="Script" class="card clickable" data-active="./image/house/剧本杀_active.png">
+            <img src="./image/house/3d.png" alt="3D" class="card clickable" data-active="./image/house/3d_active.png">
         </div>
+
+        <!-- 返回 -->
+        <img src="./image/back.png" alt="Back" class="back clickable" id="back">
+
+        <!-- 老电影效果 -->
+        <img src="./image/old_movie_1.png" alt="" class="old_movie" id="old_movie_1">
+        <img src="./image/old_movie_2.png" alt="" class="old_movie" id="old_movie_2">
+
 
 
     </div>
 
-    <!-- 交互 -->
-    <script>        
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     const cards = document.querySelectorAll('.card');
+    <script src="./main.js"></script>
+    <script>
 
-        //     // 预加载所有激活图片
-        //     cards.forEach(card => {
-        //         new Image().src = card.dataset.active;
-        //     });
+        // 返回
+        const back = document.getElementById('back');
+        back.addEventListener('click', () => {
+            window.location.href = './welcome.html';
+        });
 
-        //     cards.forEach(card => {
-        //         const originalSrc = card.src;
-        //         const activeSrc = card.dataset.active;
-
-        //         card.addEventListener('mouseenter', () => {
-        //             card.src = activeSrc;
-        //             card.style.transform = 'scale(1.4)';
-        //             card.style.zIndex = 10;
-
-        //         });
-
-        //         card.addEventListener('mouseleave', () => {
-                    
-        //             card.src = originalSrc;
-        //             card.style.zIndex = 8;
-        //             card.style.transform = 'scale(1)';
-                    
-        //         });
-        //     });
-        // });
-
+        // 卡片激活
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
 
@@ -135,14 +127,14 @@
                     // 如果图片已经加载完成，直接应用放大效果
                     if (card.complete) {
                         isImageLoaded = true;
-                        card.style.transform = 'scale(1.8)';
+                        card.style.transform = 'scale(1.4)';
                         card.style.zIndex = 10;
                     } else {
                         // 监听图片加载完成事件
                         card.addEventListener('load', () => {
                             isImageLoaded = true;
                             if (isHovered) { // 确保 hover 状态仍然有效
-                                card.style.transform = 'scale(1.8)';
+                                card.style.transform = 'scale(1.4)';
                                 card.style.zIndex = 10;
                             }
                         }, { once: true });
@@ -166,55 +158,100 @@
                     card.style.zIndex = 8;
                 });
             });
+
+
+            // 点击卡片跳转
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    window.location.href = './works.html';
+                });
+            });
         });
 
+          // 老电影效果
+          document.addEventListener('DOMContentLoaded', function () {
+            const movie1 = document.getElementById('old_movie_1');
+            const movie2 = document.getElementById('old_movie_2');
+            let isMovie1Visible = true;
 
-        window.onload = function() {
+            setInterval(() => {
+                if (isMovie1Visible) {
+                    movie1.style.display = 'none';
+                    movie2.style.display = 'block';
+                } else {
+                    movie1.style.display = 'block';
+                    movie2.style.display = 'none';
+                }
+                isMovie1Visible = !isMovie1Visible;
+            }, 200); // 每 200ms 切换一次
+        });
+
+        // 猫和狗
+        document.addEventListener("DOMContentLoaded", function () {
             const cat = document.getElementById('cat');
             const dog = document.getElementById('dog');
-            const catbook = document.getElementById('cat-book');
+            const catbook = document.querySelector('.cat-book'); // 修改为正确的 class 选择器
 
-            // 监听鼠标移入 "animal-container"
-            catbook.addEventListener('mouseenter', function () {
-                cat.style.opacity = '0';
-                cat.style.visibility = 'hidden';
-                dog.style.opacity = '1';
-                dog.style.visibility = 'visible';
+            if (catbook) {
+                catbook.addEventListener('mouseenter', function () {
+                    cat.style.opacity = '0';
+                    cat.style.visibility = 'hidden';
+                    dog.style.opacity = '1';
+                    dog.style.visibility = 'visible';
+                });
+
+                catbook.addEventListener('mouseleave', function () {
+                    cat.style.opacity = '1';
+                    cat.style.visibility = 'visible';
+                    dog.style.opacity = '0';
+                    dog.style.visibility = 'hidden';
+                });
+            }
+        });
+
+
+        // 蜘蛛收缩
+        document.addEventListener("DOMContentLoaded", function () {
+            const bigSpider = document.getElementById("big_spider");
+            const smallSpider = document.getElementById("small_spider");
+
+            bigSpider.addEventListener("mouseenter", function () {
+                bigSpider.src = "./image/house/大蜘蛛缩小.png"; // 切换缩小图片
+                bigSpider.style.pointerEvents = "none"; // 禁止鼠标事件，防止闪烁
+
+                setTimeout(() => {
+                    bigSpider.src = "./image/house/大蜘蛛@2x.png"; // 1.5 秒后恢复原来的图片
+                    bigSpider.style.pointerEvents = "auto"; // 恢复鼠标事件
+                }, 1500);
             });
 
-            catbook.addEventListener('mouseleave', function () {
-                cat.style.opacity = '1';
-                cat.style.visibility = 'visible';
-                dog.style.opacity = '0';
-                dog.style.visibility = 'hidden';
+            smallSpider.addEventListener("mouseenter", function () {
+                smallSpider.src = "./image/house/小蜘蛛缩小.png";
+                smallSpider.style.pointerEvents = "none";
+
+                setTimeout(() => {
+                    smallSpider.src = "./image/house/小蜘蛛@2x.png";
+                    smallSpider.style.pointerEvents = "auto";
+                }, 1500);
             });
-        }
-
-    </script>
-
-    <!-- 自定义鼠标指针  -->
-    <script>
-        // 获取自定义鼠标指针的 DOM 元素
-        const customCursor = document.getElementById('customCursor');
-
-        // 监听鼠标移动事件，实时更新光标位置
-        document.addEventListener('mousemove', (event) => {
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-
-            // 更新光标的位置
-            customCursor.style.left = `${mouseX}px`;
-            customCursor.style.top = `${mouseY}px`;
         });
 
-        // 监听鼠标点击事件，改变鼠标样式或触发动画
-        document.addEventListener('mousedown', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1.2)'; // 点击时放大
+        // 透明卡片，人物脸部触发
+        // 鼠标移入，人物变为摘下面具的图片，同时thinkmoregif隐藏， 鼠标移出，人物恢复，thinkmoregif显示
+        document.addEventListener("DOMContentLoaded", function () {
+            const faceCard = document.getElementById("face_card");
+            const mask = document.getElementById("mask");
+            const thinkMore = document.getElementById("think_more");
+            faceCard.addEventListener("mouseenter", function () {
+                mask.style.display = "none";
+                thinkMore.style.display = "none";
+            });
+            faceCard.addEventListener("mouseleave", function () {
+                mask.style.display = "block";
+                thinkMore.style.display = "block";
+            });
         });
 
-        document.addEventListener('mouseup', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1)'; // 恢复默认大小
-        });
     </script>
 </body>
 
