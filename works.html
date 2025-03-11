@@ -26,24 +26,68 @@
 
         <div class="works_container">
 
-            <div class="skill_menu" id="skill_menu">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
-                <img src="./image/works/skill_color_0.png" class="skill_button clickable">
+            <div class="skill_menu clickable" id="skill_menu">
+                <div class="skill_item clickable" data-index="0" data-key="pc">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_1.png" class="skill_button">
+                      <p class="skill_text">PC端</p>
+                    </div>
+                </div>
+
+                <div class="skill_item clickable" data-index="1" data-key="yidong">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">移动端</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="2" data-key="game">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">游戏</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="3" data-key="pixel">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">像素</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="4" data-key="plane">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">平面</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="5" data-key="draw">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">插画</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="6" data-key="script">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">剧本杀</p>
+                    </div>
+                </div>
+                <div class="skill_item clickable" data-index="7" data-key="3d">
+                    <div class="skill_button_wrapper">
+                      <img src="./image/works/skill_color_0.png" class="skill_button">
+                      <p class="skill_text">3D建模</p>
+                    </div>
+                </div>
             </div>
 
             <img src="./image/works/left_chunk.png" class="left_chunk">
 
-            <div class="companies" id="companies">
+            <div class="companies clickable" id="companies">
                 <!-- JS动态展示公司 -->
             </div>
 
             <img src="./image/works/right_chunk.png" class="right_chunk">
+
+            <!-- 图片展示区域 -->
+            <div class="product_display" id="product_display"></div>
             
             
         </div>
@@ -55,27 +99,93 @@
 
     <script src="./main.js"></script>
     <script>
-        // 读取 JSON 文件
-        let mainData;
-        fetch('https://fishshadower.github.io/file_hub/mainData.json')
-            .then(response => response.json())
-            .then(data => {
-                mainData = data;
-                initializeSkills(data.skills);
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-
-        // 展示公司
-        function initializeSkills(skills) {
-
-            
-        }
-
         // 返回按钮
         document.getElementById('back').addEventListener('click', () => {
             window.location.href = './house.html';
         });
+
+        // 读取 JSON 文件
+let mainData;
+fetch('https://fishshadower.github.io/file_hub/mainData.json')
+    .then(response => response.json())
+    .then(data => {
+        mainData = data;
+        console.log(mainData);
+        initializeSkills([
+            'pc', 'yidong', 'game', 'pixel',
+            'plane', 'draw', 'script', '3d'
+        ]);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+
+    // 初始化技能按钮，并默认加载第一个技能的公司
+    function initializeSkills(skillOrder) {
+        const skillMenu = document.getElementById('skill_menu');
+        const skillItems = skillMenu.querySelectorAll('.skill_item');
+
+        skillItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                // 高亮当前按钮图
+                skillItems.forEach((btn, i) => {
+                    const img = btn.querySelector('img');
+                    img.src = `./image/works/skill_color_${i === index ? (i + 1) : 0}.png`;
+                });
+
+                // 获取点击的 key（对应 json 中的 pc/yidong/...）
+                const key = item.dataset.key;
+                updateCompanies(key);
+            });
+        });
+
+        // 默认点击第一个
+        if (skillItems.length > 0) {
+            skillItems[0].click();
+        }
+    }
+
+    // 高亮当前选中的技能按钮
+    function highlightSkill(activeIndex) {
+        const allButtons = document.querySelectorAll('.skill_button');
+        allButtons.forEach((btn, idx) => {
+            btn.src = `./image/works/skill_color_${idx === activeIndex ? 1 : 0}.png`;
+        });
+    }
+
+    // 更新公司列表
+    function updateCompanies(skillKey) {
+        const companies = mainData[skillKey];
+        const companiesContainer = document.getElementById('companies');
+        companiesContainer.innerHTML = ''; // 清空旧公司
+
+        companies.forEach((company, index) => {
+            const div = document.createElement('div');
+            div.classList.add('company_button');
+            div.textContent = company.name;
+            div.addEventListener('click', () => {
+                showCompanyImages(company.images);
+            });
+            companiesContainer.appendChild(div);
+        });
+
+        // 默认显示第一个公司的图片
+        if (companies.length > 0) {
+            showCompanyImages(companies[0].images);
+        }
+    }
+
+    // 展示公司图片
+    function showCompanyImages(images) {
+        const container = document.getElementById('product_display');
+        container.innerHTML = ''; // 清空旧图片
+
+        images.forEach((src) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.classList.add('product_image');
+            container.appendChild(img);
+        });
+    }
 
     </script>
 </body>

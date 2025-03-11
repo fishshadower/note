@@ -1,29 +1,29 @@
 .works_background {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 0;
 }
 
 /* 返回 */
 .back {
-    width: 3%;
-    left: 1%;
-    position: absolute;
-    z-index: 10;
-    top: 1%;
+  width: 3%;
+  left: 1%;
+  position: absolute;
+  z-index: 10;
+  top: 1%;
 }
 
 /* 边框 */
 .border {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 1;
 }
 
 /* 作品容器 */
@@ -37,45 +37,110 @@
     z-index: 2;
 } */
 
-
 /* 确保左侧内容区位置正确 */
 .left_chunk {
-    position: absolute;
-    left: 16%;
-    top: 7%;
-    width: 10.5%;
-    z-index: 3;
+  position: absolute;
+  left: 16%;
+  top: 7%;
+  width: 10.5%;
+  z-index: 3;
 }
 
 /* 左侧内容区 */
 .right_chunk {
-    position: absolute;
-    left: 26%;
-    top: 3%;
-    width: 58%;
-    height: 94%;
-    z-index: 3;
+  position: absolute;
+  left: 26%;
+  top: 3%;
+  width: 58%;
+  height: 94%;
+  z-index: 3;
 }
 
 /* 技能菜单容器 */
 .skill_menu {
-    z-index: 2;
-    position: absolute;
-    left: 12.3%;
-    top: 9%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  z-index: 2;
+  position: absolute;
+  left: 11.3%;
+  top: 9%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-/* 单个技能按钮 */
+.skill_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.skill_button_wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .skill_button {
-    cursor: pointer;
-    transition: all 0.3s;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.skill_button:hover {
-    transform: translateX(-10px) scale(1.1);
+.skill_button_wrapper:hover .skill_button {
+  transform: scale(1.05);
 }
 
+.skill_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "ShanghaiFace", sans-serif;
+  font-size: clamp(14px, 1.2vw, 22px);
+  color: #fff;
+  pointer-events: none;
+  text-align: center;
+  white-space: nowrap;
+}
 
+/* 公司列表 */
+.companies {
+  position: absolute;
+  top: 10%;
+  left: 17%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 4;
+}
+
+.company_button {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.company_button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 展示的图片 */
+.product_display {
+  position: absolute;
+  left: 27%;
+  top: 7%;
+  width: 56%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 3;
+}
+
+.product_image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
