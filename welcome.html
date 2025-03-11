@@ -266,6 +266,29 @@
             z-index: 999;
             display: block;
         }
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 
@@ -275,6 +298,9 @@
     
     <!-- 透明卡片，点击可以进入房子 -->
     <div class="click_house_card clickable" id="click_to_house"></div>
+
+    <!-- 左上角音乐按钮 -->
+    <div id="musicBtn" class="music-btn">🎵</div>
 
     <div class="main">
 
@@ -514,6 +540,57 @@
 
             // 3、更新选项判断
             select_a = true;
+        });
+
+        // 播放背景音乐
+        document.addEventListener('DOMContentLoaded', function () {
+            const musicBtn = document.getElementById('musicBtn');
+            const backgroundMusic = new Audio('./mp3/外景音乐.mp3');
+            backgroundMusic.loop = true;
+            backgroundMusic.volume = 0.5;
+
+            let isPlaying = false;
+            let hasUserInteracted = false;
+
+            // 手动点击按钮：播放/暂停
+            musicBtn.addEventListener('click', function (event) {
+                event.stopPropagation(); // 防止冒泡到 document 触发自动播放
+
+                if (!isPlaying) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            isPlaying = true;
+                            musicBtn.textContent = '⏸️';
+                        })
+                        .catch(err => {
+                            console.warn("⚠️ 播放失败：", err);
+                        });
+                } else {
+                    backgroundMusic.pause();
+                    isPlaying = false;
+                    musicBtn.textContent = '🎵';
+                }
+            });
+
+            // 首次点击页面任意处：自动播放
+            const startMusic = () => {
+                if (!hasUserInteracted) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            isPlaying = true;
+                            hasUserInteracted = true;
+                            musicBtn.textContent = '⏸️';
+                            console.log("🎵 首次点击自动播放成功");
+                        })
+                        .catch(err => {
+                            console.warn("⚠️ 首次自动播放失败：", err);
+                        });
+
+                    document.removeEventListener('click', startMusic); // 一次绑定
+                }
+            };
+
+            document.addEventListener('click', startMusic);
         });
 
     </script>

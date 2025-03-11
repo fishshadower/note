@@ -19,7 +19,7 @@
 .big_spider {
     width: 2.5%;
     position: absolute;
-    z-index: 999;
+    z-index: 8;
     left: 20.5%;
     top: 18.5%;
 }
@@ -27,7 +27,7 @@
 .small_spider {
     width: 2%;
     position: absolute;
-    z-index: 999;
+    z-index: 8;
     left: 16%;
     top: 18%;
 }
@@ -103,10 +103,9 @@
 .cat-book {
     width: 12%;
     position: absolute;
-    z-index: 999;
+    z-index: 8;
     left: 60%;
     bottom: 48%;
-    cursor: pointer;
     pointer-events: auto;
 }
 
@@ -115,7 +114,7 @@
     bottom: 42%;
     position: fixed;
     left: 61.5%;
-    z-index: 999;
+    z-index: 4;
     pointer-events: auto;
     opacity: 1;
     visibility: visible;
@@ -126,7 +125,7 @@
     bottom: 42%;
     position: fixed;
     left: 59.8%;
-    z-index: 999;
+    z-index: 4;
     pointer-events: auto;
     opacity: 0;
     visibility: hidden;
@@ -138,6 +137,7 @@
     bottom: 35%;
     position: fixed;
     left: 61%;
+    pointer-events: auto;
 }
 
 /* 花盆 */
@@ -155,6 +155,7 @@
     position: absolute;
     z-index: 5;
     top: 0;
+    pointer-events: none;
 }
 
 /* 小灯光 */
@@ -163,6 +164,7 @@
     position: absolute;
     z-index: 6;
     top: 0;
+    pointer-events: none;
 }
 
 /* 小绿灯 */
@@ -275,22 +277,32 @@
 /* 面具 */
 .mask {
     width: 17%;
-    left: 41%;
+    left: 40%;
     position: absolute;
     z-index: 4;
-    top: 10%;
+    top: 17%;
     pointer-events: none;
+}
+
+/* 面具激活 */
+.mask_active {
+    width: 76%;
+    left: 10.5%;
+    position: absolute;
+    z-index: 4;
+    top: 9%;
+    pointer-events: none;
+    display: none;
 }
 
 /* 思考 */
 .think_more {
     width: 7%;
-    left: 37%;
+    left: 36%;
     position: absolute;
     z-index: 4;
-    top: 21%;
+    top: 25%;
     pointer-events: none;
-    transform: rotate(180deg);
 }
 
 /* 返回 */
@@ -327,7 +339,7 @@
 /* 透明卡片，人物脸部触发 */
 .face_card {
     position: absolute;
-    top: 33%;
+    top: 42%;
     left: 49%;
     transform: translate(-50%, -50%);
     width: 178px;
@@ -335,4 +347,28 @@
     background-color: rgba(255, 255, 255, 0);  /* 透明背景 */
     z-index: 999;
     cursor: pointer;
+}
+
+/* 音乐按钮 */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.music-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }

@@ -17,6 +17,9 @@
     <!-- 透明卡片，人物脸部触发 -->
     <div class="face_card" id="face_card"></div>
 
+    <!-- 音乐按钮 -->
+    <div id="musicBtn" class="music-btn">🎵</div>
+
     <div class="main">
         <img src="./image/house/咒语背景墙@2x.png" alt="" class="house_background" id="house_background">
 
@@ -33,7 +36,8 @@
         </div>
 
         <img src="./image/house/面具眨眼.gif" alt="" class="mask" id="mask">
-        <img src="./image/think_more.gif" alt="" class="think_more" id="think_more">
+        <img src="./image/house/对话框.gif" alt="" class="think_more" id="think_more">
+        <img src="./image/house/技能卡片动画.gif" alt="" class="mask_active" id="mask_active">
 
         <img src="./image/house/桌子@2x.png" alt="" class="thetable" id="thetable">
         <img src="./image/house/骷髅.gif" alt="" class="hedgehog" id="hedgehog">
@@ -242,14 +246,70 @@
             const faceCard = document.getElementById("face_card");
             const mask = document.getElementById("mask");
             const thinkMore = document.getElementById("think_more");
+            const maskActive = document.getElementById("mask_active");
             faceCard.addEventListener("mouseenter", function () {
                 mask.style.display = "none";
                 thinkMore.style.display = "none";
+                maskActive.style.display = "block";
             });
             faceCard.addEventListener("mouseleave", function () {
-                mask.style.display = "block";
-                thinkMore.style.display = "block";
+                setTimeout(() => {
+                    mask.style.display = "block";
+                    thinkMore.style.display = "block";
+                    maskActive.style.display = "none";
+                }, 12000);
             });
+        });
+
+        // 播放背景音乐
+        document.addEventListener('DOMContentLoaded', function () {
+            const musicBtn = document.getElementById('musicBtn');
+            const backgroundMusic = new Audio('./mp3/小屋音乐.mp3');
+            backgroundMusic.loop = true;
+            backgroundMusic.volume = 0.5;
+
+            let isPlaying = false;
+            let hasUserInteracted = false;
+
+            // 手动点击按钮：播放/暂停
+            musicBtn.addEventListener('click', function (event) {
+                event.stopPropagation(); // 防止冒泡到 document 触发自动播放
+
+                if (!isPlaying) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            isPlaying = true;
+                            musicBtn.textContent = '⏸️';
+                        })
+                        .catch(err => {
+                            console.warn("⚠️ 播放失败：", err);
+                        });
+                } else {
+                    backgroundMusic.pause();
+                    isPlaying = false;
+                    musicBtn.textContent = '🎵';
+                }
+            });
+
+            // 首次点击页面任意处：自动播放
+            const startMusic = () => {
+                if (!hasUserInteracted) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            isPlaying = true;
+                            hasUserInteracted = true;
+                            musicBtn.textContent = '⏸️';
+                            console.log("🎵 首次点击自动播放成功");
+                        })
+                        .catch(err => {
+                            console.warn("⚠️ 首次自动播放失败：", err);
+                        });
+
+                    document.removeEventListener('click', startMusic); // 一次绑定
+                }
+            };
+
+            document.addEventListener('click', startMusic);
         });
 
     </script>
