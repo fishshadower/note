@@ -22,7 +22,8 @@
             bottom: 0;
             right: 0;
             background: black;
-            z-index: 6; /* 确保阴影层在人物和对话框下方 */
+            z-index: 6;
+            /* 确保阴影层在人物和对话框下方 */
             animation: fadeAmbient 3s infinite alternate ease-in-out;
         }
 
@@ -31,9 +32,11 @@
             0% {
                 opacity: 0.2;
             }
+
             50% {
                 opacity: 0.6;
             }
+
             100% {
                 opacity: 0.3;
             }
@@ -72,7 +75,8 @@
             /* left: 16%; */
             z-index: 3;
             height: 90%;
-            transition: opacity 0.3s ease-in-out; /* 0.3秒的渐变 */
+            transition: opacity 0.3s ease-in-out;
+            /* 0.3秒的渐变 */
         }
 
         .house-overlay {
@@ -82,20 +86,29 @@
             /* left: 16%; */
             z-index: 3;
             height: 90%;
-            opacity: 0;  /* 初始隐藏 */
-            pointer-events: none;  /* 确保不影响点击 */
+            opacity: 0;
+            /* 初始隐藏 */
+            pointer-events: none;
+            /* 确保不影响点击 */
         }
 
         .click_house_card {
             position: absolute;
-            top: 30%;  /* 使矩形出现在屏幕中心 */
-            left: 51%; 
-            transform: translate(-50%, -50%);  /* 精确居中 */
-            width: 200px;  /* 矩形宽度 */
-            height: 300px;  /* 矩形高度 */
-            background-color: rgba(255, 255, 255, 0);  /* 透明背景 */
-            z-index: 10;  /* 保证层级在其他元素之上 */
-            cursor: pointer;  /* 鼠标悬停时显示点击手势 */
+            top: 30%;
+            /* 使矩形出现在屏幕中心 */
+            left: 51%;
+            transform: translate(-50%, -50%);
+            /* 精确居中 */
+            width: 200px;
+            /* 矩形宽度 */
+            height: 300px;
+            /* 矩形高度 */
+            background-color: rgba(255, 255, 255, 0);
+            /* 透明背景 */
+            z-index: 10;
+            /* 保证层级在其他元素之上 */
+            cursor: pointer;
+            /* 鼠标悬停时显示点击手势 */
         }
 
 
@@ -248,18 +261,24 @@
 
         .old_movie {
             width: 100%;
-            position: fixed;  /* 改为 fixed，这样不会影响页面内容的布局 */
+            position: fixed;
+            /* 改为 fixed，这样不会影响页面内容的布局 */
             top: 0;
             left: 0;
             z-index: 10;
-            max-height: 100vh; /* 限制图片最大高度为视口高度 */
-            object-fit: cover; /* 确保图片保持比例填充 */
-            pointer-events: none; /* 禁止接收鼠标事件 */
+            max-height: 100vh;
+            /* 限制图片最大高度为视口高度 */
+            object-fit: cover;
+            /* 确保图片保持比例填充 */
+            pointer-events: none;
+            /* 禁止接收鼠标事件 */
         }
 
-        #old_movie_1, #old_movie_2 {
+        #old_movie_1,
+        #old_movie_2 {
             z-index: 999;
-            display: none; /* 初始都不显示 */
+            display: none;
+            /* 初始都不显示 */
         }
 
         #old_movie_1 {
@@ -272,22 +291,28 @@
             top: 20px;
             left: 20px;
             z-index: 9999;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-            user-select: none;
             transition: background 0.3s ease;
+            padding: 6px;
         }
 
         .music-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .music-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            /* 鼠标事件穿透图片，点击到按钮上 */
         }
     </style>
 </head>
@@ -295,12 +320,13 @@
 <body>
     <!-- 自定义鼠标指针 -->
     <img src="./image/cursor.png" alt="Custom Cursor" class="custom-cursor" id="customCursor">
-    
+
     <!-- 透明卡片，点击可以进入房子 -->
     <div class="click_house_card clickable" id="click_to_house"></div>
 
-    <!-- 左上角音乐按钮 -->
-    <div id="musicBtn" class="music-btn">🎵</div>
+    <div id="musicBtn" class="music-btn clickable">
+        <img id="musicIcon" src="./image/音乐关.png" alt="Music Icon">
+    </div>
 
     <div class="main">
 
@@ -545,6 +571,7 @@
         // 播放背景音乐
         document.addEventListener('DOMContentLoaded', function () {
             const musicBtn = document.getElementById('musicBtn');
+            const musicIcon = document.getElementById('musicIcon');
             const backgroundMusic = new Audio('./mp3/外景音乐.mp3');
             backgroundMusic.loop = true;
             backgroundMusic.volume = 0.5;
@@ -552,15 +579,19 @@
             let isPlaying = false;
             let hasUserInteracted = false;
 
-            // 手动点击按钮：播放/暂停
+            const updateIcon = () => {
+                musicIcon.src = isPlaying ? './image/音乐开.png' : './image/音乐关.png';
+            };
+
+            // 点击按钮控制音乐
             musicBtn.addEventListener('click', function (event) {
-                event.stopPropagation(); // 防止冒泡到 document 触发自动播放
+                event.stopPropagation();
 
                 if (!isPlaying) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                         })
                         .catch(err => {
                             console.warn("⚠️ 播放失败：", err);
@@ -568,25 +599,25 @@
                 } else {
                     backgroundMusic.pause();
                     isPlaying = false;
-                    musicBtn.textContent = '🎵';
+                    updateIcon();
                 }
             });
 
-            // 首次点击页面任意处：自动播放
+            // 首次点击任意地方自动播放
             const startMusic = () => {
                 if (!hasUserInteracted) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
                             hasUserInteracted = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                             console.log("🎵 首次点击自动播放成功");
                         })
                         .catch(err => {
                             console.warn("⚠️ 首次自动播放失败：", err);
                         });
 
-                    document.removeEventListener('click', startMusic); // 一次绑定
+                    document.removeEventListener('click', startMusic);
                 }
             };
 

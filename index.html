@@ -168,22 +168,27 @@
             top: 20px;
             left: 20px;
             z-index: 9999;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-            user-select: none;
             transition: background 0.3s ease;
+            padding: 6px;
         }
 
         .music-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .music-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none; /* 鼠标事件穿透图片，点击到按钮上 */
         }
 
 
@@ -194,8 +199,9 @@
     <!-- 自定义鼠标指针 -->
     <img src="./image/cursor.png" alt="Custom Cursor" class="custom-cursor" id="customCursor">
 
-    <!-- 左上角音乐按钮 -->
-    <div id="musicBtn" class="music-btn">🎵</div>
+    <div id="musicBtn" class="music-btn clickable">
+        <img id="musicIcon" src="./image/音乐关.png" alt="Music Icon">
+    </div>
 
     <div class="main">
 
@@ -341,6 +347,7 @@
         // 播放背景音乐
         document.addEventListener('DOMContentLoaded', function () {
             const musicBtn = document.getElementById('musicBtn');
+            const musicIcon = document.getElementById('musicIcon');
             const backgroundMusic = new Audio('./mp3/外景音乐.mp3');
             backgroundMusic.loop = true;
             backgroundMusic.volume = 0.5;
@@ -348,15 +355,19 @@
             let isPlaying = false;
             let hasUserInteracted = false;
 
-            // 手动点击按钮：播放/暂停
+            const updateIcon = () => {
+                musicIcon.src = isPlaying ? './image/音乐开.png' : './image/音乐关.png';
+            };
+
+            // 点击按钮控制音乐
             musicBtn.addEventListener('click', function (event) {
-                event.stopPropagation(); // 防止冒泡到 document 触发自动播放
+                event.stopPropagation();
 
                 if (!isPlaying) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                         })
                         .catch(err => {
                             console.warn("⚠️ 播放失败：", err);
@@ -364,30 +375,31 @@
                 } else {
                     backgroundMusic.pause();
                     isPlaying = false;
-                    musicBtn.textContent = '🎵';
+                    updateIcon();
                 }
             });
 
-            // 首次点击页面任意处：自动播放
+            // 首次点击任意地方自动播放
             const startMusic = () => {
                 if (!hasUserInteracted) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
                             hasUserInteracted = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                             console.log("🎵 首次点击自动播放成功");
                         })
                         .catch(err => {
                             console.warn("⚠️ 首次自动播放失败：", err);
                         });
 
-                    document.removeEventListener('click', startMusic); // 一次绑定
+                    document.removeEventListener('click', startMusic);
                 }
             };
 
             document.addEventListener('click', startMusic);
         });
+
 
 
         

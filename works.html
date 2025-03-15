@@ -26,75 +26,89 @@
 
         <div class="works_container">
 
-            <div class="skill_menu clickable" id="skill_menu">
-                <div class="skill_item clickable" data-index="0" data-key="pc">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_1.png" class="skill_button">
-                      <p class="skill_text">PC端</p>
+            <!-- 左边区域包裹容器 -->
+            <div class="left_panel">
+
+                <!-- 技能菜单 -->
+                <div class="skill_menu clickable" id="skill_menu">
+                    <div class="skill_item clickable" data-index="0" data-key="pc">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_1.png" class="skill_button">
+                            <p class="skill_text">PC端</p>
+                        </div>
+                    </div>
+
+                    <div class="skill_item clickable" data-index="1" data-key="yidong">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">移动端</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="2" data-key="game">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">游戏</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="3" data-key="pixel">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">像素</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="4" data-key="plane">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">平面</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="5" data-key="draw">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">插画</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="6" data-key="script">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">剧本杀</p>
+                        </div>
+                    </div>
+                    <div class="skill_item clickable" data-index="7" data-key="3d">
+                        <div class="skill_button_wrapper">
+                            <img src="./image/works/skill_color_0.png" class="skill_button">
+                            <p class="skill_text">3D建模</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="skill_item clickable" data-index="1" data-key="yidong">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">移动端</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="2" data-key="game">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">游戏</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="3" data-key="pixel">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">像素</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="4" data-key="plane">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">平面</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="5" data-key="draw">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">插画</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="6" data-key="script">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">剧本杀</p>
-                    </div>
-                </div>
-                <div class="skill_item clickable" data-index="7" data-key="3d">
-                    <div class="skill_button_wrapper">
-                      <img src="./image/works/skill_color_0.png" class="skill_button">
-                      <p class="skill_text">3D建模</p>
-                    </div>
-                </div>
-            </div>
+                <!-- 左侧内容区 -->
+                <img src="./image/works/left_chunk.png" class="left_chunk">
 
-            <img src="./image/works/left_chunk.png" class="left_chunk">
+                <!-- 技能背景图 -->
+                <img src="./image/works/skill_bg_1.png" alt="Skill Background" class="skill_background"
+                    id="skill_background">
 
-            <div class="companies clickable" id="companies">
-                <!-- JS动态展示公司 -->
+                <div class="companies clickable" id="companies">
+                    <!-- JS动态展示公司 -->
+                </div>
             </div>
 
             <img src="./image/works/right_chunk.png" class="right_chunk">
 
             <!-- 图片展示区域 -->
             <div class="product_display" id="product_display"></div>
-            
-            
-        </div>
-            
+
+            <!-- 回到顶部 -->
+            <img src="./image/works/上.jpg" alt="Back to Top" class="back_to_top clickable" id="back_to_top">
+
+            <!-- 下载PDF -->
+            <img src="./image/works/下载pdf.png" alt="Download PDF" class="download_pdf clickable" id="download_pdf">
         </div>
 
-        
+    </div>
+
+
     </div>
 
     <script src="./main.js"></script>
@@ -105,88 +119,158 @@
         });
 
         // 读取 JSON 文件
-let mainData;
-fetch('https://fishshadower.github.io/file_hub/mainData.json')
-    .then(response => response.json())
-    .then(data => {
-        mainData = data;
-        console.log(mainData);
-        initializeSkills([
-            'pc', 'yidong', 'game', 'pixel',
-            'plane', 'draw', 'script', '3d'
-        ]);
-    }).catch(error => {
-        console.error('Error:', error);
-    });
+        let mainData;
+        fetch('https://fishshadower.github.io/file_hub/mainData.json')
+            .then(response => response.json())
+            .then(data => {
+                mainData = data;
+                console.log(mainData);
 
-    // 初始化技能按钮，并默认加载第一个技能的公司
-    function initializeSkills(skillOrder) {
-        const skillMenu = document.getElementById('skill_menu');
-        const skillItems = skillMenu.querySelectorAll('.skill_item');
+                // 获取 URL 参数
+                const params = new URLSearchParams(window.location.search);
+                let typeFromUrl = params.get('type'); // 比如 'game'
+                if (!typeFromUrl) {
+                    typeFromUrl = 'pc';
+                }
 
-        skillItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                // 高亮当前按钮图
-                skillItems.forEach((btn, i) => {
-                    const img = btn.querySelector('img');
-                    img.src = `./image/works/skill_color_${i === index ? (i + 1) : 0}.png`;
+                // 初始化技能并传入默认高亮的 key
+                initializeSkills([
+                    'pc', 'phone', 'game', 'pixel',
+                    'plane', 'art', 'script', '3d'
+                ], typeFromUrl);
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+
+        // 初始化技能按钮，并默认加载第一个技能的公司
+        function initializeSkills(skillOrder, defaultKey) {
+            const skillMenu = document.getElementById('skill_menu');
+            const skillItems = skillMenu.querySelectorAll('.skill_item');
+
+            skillItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    // 高亮当前按钮图
+                    skillItems.forEach((btn, i) => {
+                        const img = btn.querySelector('img');
+                        img.src = './image/works/skill_color_' + (i === index ? (i + 1) : 0) + '.png';
+                    });
+
+                    // 获取点击的 key（对应 json 中的 pc/yidong/...）
+                    const key = item.dataset.key;
+                    updateCompanies(key);
+
+                    // 更新背景图
+                    updateSkillBackground(key);
+                });
+            });
+
+            if (skillItems.length > 0) {
+                const defaultIndex = skillOrder.indexOf(defaultKey);
+                if (defaultIndex !== -1) {
+                    skillItems[defaultIndex].click(); // 点击传入的 key 对应按钮
+                } else {
+                    skillItems[0].click(); // 否则默认第一个
+                }
+            }
+        }
+
+        // 根据选中的技能 key 切换背景图
+        function updateSkillBackground(key) {
+            const bgMap = {
+                pc: 'skill_bg_1.png',
+                yidong: 'skill_bg_2.png',
+                game: 'skill_bg_3.png',
+                pixel: 'skill_bg_4.png',
+                plane: 'skill_bg_5.png',
+                draw: 'skill_bg_6.png',
+                script: 'skill_bg_7.png',
+                '3d': 'skill_bg_8.png'
+            };
+            const bg = document.getElementById('skill_background');
+            bg.src = './image/works/' + (bgMap[key] || 'skill_bg_1.png');
+        }
+
+        // 高亮当前选中的技能按钮
+        function highlightSkill(activeIndex) {
+            const allButtons = document.querySelectorAll('.skill_button');
+            allButtons.forEach((btn, idx) => {
+                btn.src = './image/works/skill_color_' + (idx === activeIndex ? 1 : 0) + '.png';
+            });
+        }
+
+        // 更新公司列表
+        function updateCompanies(skillKey) {
+            const companies = mainData[skillKey];
+            const companiesContainer = document.getElementById('companies');
+            companiesContainer.innerHTML = '';
+
+            companies.forEach((company, index) => {
+                const div = document.createElement('div');
+                div.classList.add('company_button');
+                div.textContent = company.name;
+
+                const arrow = document.createElement('img');
+                arrow.classList.add('company_arrow');
+                arrow.src = './image/works/company_arrow_1.png'; // 默认灰色箭头
+
+                div.appendChild(arrow);
+
+                div.addEventListener('click', () => {
+                    // 移除旧高亮
+                    const allBtns = document.querySelectorAll('.company_button');
+                    allBtns.forEach(btn => {
+                        btn.classList.remove('active');
+                        const img = btn.querySelector('img');
+                        if (img) img.src = './image/works/company_arrow_1.png';
+                    });
+
+                    // 设置新高亮
+                    div.classList.add('active');
+                    arrow.src = './image/works/company_arrow_2.png';
+
+                    showCompanyImages(company.images);
                 });
 
-                // 获取点击的 key（对应 json 中的 pc/yidong/...）
-                const key = item.dataset.key;
-                updateCompanies(key);
+                companiesContainer.appendChild(div);
+            });
+
+            // 默认点击第一个公司
+            if (companies.length > 0) {
+                companiesContainer.firstChild.click();
+            }
+        }
+
+        // 展示公司图片
+        function showCompanyImages(images) {
+            const container = document.getElementById('product_display');
+            container.innerHTML = ''; // 清空旧图片
+
+            images.forEach((src) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.classList.add('product_image');
+                container.appendChild(img);
+            });
+        }
+
+        // 回到顶部
+        const backToTopBtn = document.getElementById('back_to_top');
+        const productDisplay = document.getElementById('product_display');
+
+        backToTopBtn.addEventListener('click', () => {
+            productDisplay.scrollTo({
+                top: 0,
+                behavior: 'smooth' // ✅    平滑滚动
             });
         });
 
-        // 默认点击第一个
-        if (skillItems.length > 0) {
-            skillItems[0].click();
-        }
-    }
-
-    // 高亮当前选中的技能按钮
-    function highlightSkill(activeIndex) {
-        const allButtons = document.querySelectorAll('.skill_button');
-        allButtons.forEach((btn, idx) => {
-            btn.src = `./image/works/skill_color_${idx === activeIndex ? 1 : 0}.png`;
+        // 下载PDF
+        const downloadPdfBtn = document.getElementById('download_pdf');
+        downloadPdfBtn.addEventListener('click', () => {
+            console.log("下载PDF");
+            let url = mainData.biographicalNote;
+            window.open(url, '_blank');
         });
-    }
-
-    // 更新公司列表
-    function updateCompanies(skillKey) {
-        const companies = mainData[skillKey];
-        const companiesContainer = document.getElementById('companies');
-        companiesContainer.innerHTML = ''; // 清空旧公司
-
-        companies.forEach((company, index) => {
-            const div = document.createElement('div');
-            div.classList.add('company_button');
-            div.textContent = company.name;
-            div.addEventListener('click', () => {
-                showCompanyImages(company.images);
-            });
-            companiesContainer.appendChild(div);
-        });
-
-        // 默认显示第一个公司的图片
-        if (companies.length > 0) {
-            showCompanyImages(companies[0].images);
-        }
-    }
-
-    // 展示公司图片
-    function showCompanyImages(images) {
-        const container = document.getElementById('product_display');
-        container.innerHTML = ''; // 清空旧图片
-
-        images.forEach((src) => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.classList.add('product_image');
-            container.appendChild(img);
-        });
-    }
-
     </script>
 </body>
 

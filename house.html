@@ -17,8 +17,9 @@
     <!-- 透明卡片，人物脸部触发 -->
     <div class="face_card" id="face_card"></div>
 
-    <!-- 音乐按钮 -->
-    <div id="musicBtn" class="music-btn">🎵</div>
+    <div id="musicBtn" class="music-btn clickable">
+        <img id="musicIcon" src="./image/音乐关.png" alt="Music Icon">
+    </div>
 
     <div class="main">
         <img src="./image/house/咒语背景墙@2x.png" alt="" class="house_background" id="house_background">
@@ -37,7 +38,8 @@
 
         <img src="./image/house/面具眨眼.gif" alt="" class="mask" id="mask">
         <img src="./image/house/对话框.gif" alt="" class="think_more" id="think_more">
-        <img src="./image/house/技能卡片动画.gif" alt="" class="mask_active" id="mask_active">
+        <!-- <img src="./image/house/技能卡片动画.gif" alt="" class="mask_active" id="mask_active"> -->
+        <img src="./image/house/技能卡片动画_白边.gif" alt="" class="mask_active" id="mask_active">
 
         <img src="./image/house/桌子@2x.png" alt="" class="thetable" id="thetable">
         <img src="./image/house/骷髅.gif" alt="" class="hedgehog" id="hedgehog">
@@ -78,14 +80,14 @@
         <img src="./image/house/黑色前景@2x.png" alt="" class="foreground" id="foreground">
 
         <div class="skill_container">
-            <img src="./image/house/pc.png" alt="PC" class="card clickable" data-active="./image/house/pc_active.png">
-            <img src="./image/house/移动端.png" alt="Phone" class="card clickable" data-active="./image/house/移动端_active.png">
-            <img src="./image/house/游戏.png" alt="Game" class="card clickable" data-active="./image/house/游戏_active.png">
-            <img src="./image/house/像素.png" alt="Pixel" class="card clickable" data-active="./image/house/像素_active.png">
-            <img src="./image/house/平面.png" alt="Plane" class="card clickable" data-active="./image/house/平面_active.png">
-            <img src="./image/house/插画.png" alt="Art" class="card clickable" data-active="./image/house/插画_active.png">
-            <img src="./image/house/剧本杀.png" alt="Script" class="card clickable" data-active="./image/house/剧本杀_active.png">
-            <img src="./image/house/3d.png" alt="3D" class="card clickable" data-active="./image/house/3d_active.png">
+            <img src="./image/house/pc.png" alt="PC" class="card clickable" data-active="./image/house/pc_active.png" data-type="pc">
+            <img src="./image/house/移动端.png" alt="Phone" class="card clickable" data-active="./image/house/移动端_active.png" data-type="phone">
+            <img src="./image/house/游戏.png" alt="Game" class="card clickable" data-active="./image/house/游戏_active.png" data-type="game">
+            <img src="./image/house/像素.png" alt="Pixel" class="card clickable" data-active="./image/house/像素_active.png" data-type="pixel">
+            <img src="./image/house/平面.png" alt="Plane" class="card clickable" data-active="./image/house/平面_active.png" data-type="plane">
+            <img src="./image/house/插画.png" alt="Art" class="card clickable" data-active="./image/house/插画_active.png" data-type="art">
+            <img src="./image/house/剧本杀.png" alt="Script" class="card clickable" data-active="./image/house/剧本杀_active.png" data-type="script">
+            <img src="./image/house/3d.png" alt="3D" class="card clickable" data-active="./image/house/3d_active.png" data-type="3d">
         </div>
 
         <!-- 返回 -->
@@ -163,11 +165,12 @@
                 });
             });
 
-
-            // 点击卡片跳转
+            // 点击卡片跳转并传参
             cards.forEach(card => {
                 card.addEventListener('click', () => {
-                    window.location.href = './works.html';
+                    const type = card.dataset.type; // 读取自定义参数
+                    const url = `./works.html?type=${encodeURIComponent(type)}`;
+                    window.location.href = url;
                 });
             });
         });
@@ -253,17 +256,16 @@
                 maskActive.style.display = "block";
             });
             faceCard.addEventListener("mouseleave", function () {
-                setTimeout(() => {
-                    mask.style.display = "block";
-                    thinkMore.style.display = "block";
-                    maskActive.style.display = "none";
-                }, 12000);
+                mask.style.display = "block";
+                thinkMore.style.display = "block";
+                maskActive.style.display = "none";
             });
         });
 
         // 播放背景音乐
         document.addEventListener('DOMContentLoaded', function () {
             const musicBtn = document.getElementById('musicBtn');
+            const musicIcon = document.getElementById('musicIcon');
             const backgroundMusic = new Audio('./mp3/小屋音乐.mp3');
             backgroundMusic.loop = true;
             backgroundMusic.volume = 0.5;
@@ -271,15 +273,19 @@
             let isPlaying = false;
             let hasUserInteracted = false;
 
-            // 手动点击按钮：播放/暂停
+            const updateIcon = () => {
+                musicIcon.src = isPlaying ? './image/音乐开.png' : './image/音乐关.png';
+            };
+
+            // 点击按钮控制音乐
             musicBtn.addEventListener('click', function (event) {
-                event.stopPropagation(); // 防止冒泡到 document 触发自动播放
+                event.stopPropagation();
 
                 if (!isPlaying) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                         })
                         .catch(err => {
                             console.warn("⚠️ 播放失败：", err);
@@ -287,25 +293,25 @@
                 } else {
                     backgroundMusic.pause();
                     isPlaying = false;
-                    musicBtn.textContent = '🎵';
+                    updateIcon();
                 }
             });
 
-            // 首次点击页面任意处：自动播放
+            // 首次点击任意地方自动播放
             const startMusic = () => {
                 if (!hasUserInteracted) {
                     backgroundMusic.play()
                         .then(() => {
                             isPlaying = true;
                             hasUserInteracted = true;
-                            musicBtn.textContent = '⏸️';
+                            updateIcon();
                             console.log("🎵 首次点击自动播放成功");
                         })
                         .catch(err => {
                             console.warn("⚠️ 首次自动播放失败：", err);
                         });
 
-                    document.removeEventListener('click', startMusic); // 一次绑定
+                    document.removeEventListener('click', startMusic);
                 }
             };
 
